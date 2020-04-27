@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import com.puppycrawl.tools.checkstyle.api.AuditEvent;
@@ -123,7 +124,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
                          AuditEventFormatter messageFormatter) {
         closeInfo = closeInfoAfterUse;
         closeError = closeErrorAfterUse;
-        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, StandardCharsets.UTF_8);
+        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, Charset.defaultCharset());
         infoWriter = new PrintWriter(infoStreamWriter);
 
         if (infoStream == errorStream) {
@@ -131,7 +132,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
         }
         else {
             final Writer errorStreamWriter = new OutputStreamWriter(errorStream,
-                    StandardCharsets.UTF_8);
+                    Charset.defaultCharset());
             errorWriter = new PrintWriter(errorStreamWriter);
         }
         formatter = messageFormatter;
@@ -179,7 +180,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
                          AuditEventFormatter messageFormatter) {
         closeInfo = infoStreamOptions == OutputStreamOptions.CLOSE;
         closeError = errorStreamOptions == OutputStreamOptions.CLOSE;
-        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, StandardCharsets.UTF_8);
+        final Writer infoStreamWriter = new OutputStreamWriter(infoStream, Charset.defaultCharset());
         infoWriter = new PrintWriter(infoStreamWriter);
 
         if (infoStream == errorStream) {
@@ -187,7 +188,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
         }
         else {
             final Writer errorStreamWriter = new OutputStreamWriter(errorStream,
-                    StandardCharsets.UTF_8);
+                    Charset.defaultCharset());
             errorWriter = new PrintWriter(errorStreamWriter);
         }
         formatter = messageFormatter;
